@@ -41,4 +41,16 @@ public class ContactHelper extends HelperBase{
   public void initContactCreation() {
     click(By.linkText("add new"));
   }
+
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  public void initContactModification() {
+    click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='nsokolova2@N_company.ru'])[1]/following::img[2]"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
 }
