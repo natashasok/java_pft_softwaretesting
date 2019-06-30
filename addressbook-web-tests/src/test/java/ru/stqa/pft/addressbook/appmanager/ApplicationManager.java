@@ -25,8 +25,6 @@ public class ApplicationManager {
     sessionHelper.login("admin", "secret");
   }
 
-
-
   public void stop() {
     wd.quit();
   }
@@ -34,8 +32,6 @@ public class ApplicationManager {
   public void logout() {
     wd.findElement(By.linkText("Logout")).click();
   }
-
-
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
