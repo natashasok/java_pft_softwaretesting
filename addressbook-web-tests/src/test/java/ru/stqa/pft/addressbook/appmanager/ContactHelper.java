@@ -53,4 +53,8 @@ public class ContactHelper extends HelperBase{
   public void submitContactModification() {
     click(By.name("update"));
   }
+
+  public void deleteSelectedContact() {
+    click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[3]"));
+  }
 }
