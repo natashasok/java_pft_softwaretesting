@@ -11,12 +11,12 @@ public class TestBase {
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     app.init();
-    app.login("admin", "secret");
   }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     app.stop();
+
   }
 
 }
