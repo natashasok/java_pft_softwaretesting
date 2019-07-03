@@ -47,7 +47,7 @@ public class ContactHelper extends HelperBase{
   }
 
   public void initContactModification() {
-    click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='nsokolova2@N_company.ru'])[1]/following::img[2]"));
+    click(By.cssSelector("img[alt=\"Edit\"]"));
   }
 
   public void submitContactModification() {
@@ -55,6 +55,10 @@ public class ContactHelper extends HelperBase{
   }
 
   public void deleteSelectedContact() {
-    click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[3]"));
+    click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void closeDialog() {
+    wd.switchTo().alert().accept();
   }
 }
