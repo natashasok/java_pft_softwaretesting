@@ -69,4 +69,14 @@ public class ContactHelper extends HelperBase{
   public void closeDialog() {
     wd.switchTo().alert().accept();
   }
+
+  public void createContact(ContactData contact, boolean creation) {
+    initContactCreation();
+    fillContactForm(contact, creation);
+    submitContactCreation();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPreasent(By.name("selected[]"));
+  }
 }
