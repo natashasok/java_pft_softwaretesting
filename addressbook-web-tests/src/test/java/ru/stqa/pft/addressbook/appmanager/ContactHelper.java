@@ -11,7 +11,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -22,26 +22,26 @@ public class ContactHelper extends HelperBase{
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
-    type(By.name("firstname"),contactData.getFirstName());
-    type(By.name("middlename"),contactData.getMiddleName());
-    type(By.name("lastname"),contactData.getLastName());
-    type(By.name("nickname"),contactData.getNickName());
-    type(By.name("title"),contactData.getTitle());
-    type(By.name("company"),contactData.getCompany());
-    type(By.name("address"),contactData.getAddress());
-    type(By.name("home"),contactData.getPhoneHome());
-    type(By.name("mobile"),contactData.getPhoneMobile());
-    type(By.name("work"),contactData.getPhoneWork());
-    type(By.name("fax"),contactData.getFax());
-    type(By.name("email"),contactData.getEmail());
-    type(By.name("email2"),contactData.getEmail2());
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("middlename"), contactData.getMiddleName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("nickname"), contactData.getNickName());
+    type(By.name("title"), contactData.getTitle());
+    type(By.name("company"), contactData.getCompany());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("home"), contactData.getPhoneHome());
+    type(By.name("mobile"), contactData.getPhoneMobile());
+    type(By.name("work"), contactData.getPhoneWork());
+    type(By.name("fax"), contactData.getFax());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
     click(By.name("bday"));
     new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getBday());
     click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Birthday:'])[1]/following::option[20]"));
     click(By.name("bmonth"));
     new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
     click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Birthday:'])[1]/following::option[43]"));
-    type(By.name("byear"),contactData.getByear());
+    type(By.name("byear"), contactData.getByear());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -91,13 +91,13 @@ public class ContactHelper extends HelperBase{
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']"));
-    for (WebElement element : elements){
+    for (WebElement element : elements) {
       String firstName = element.findElement(By.xpath(".//td[3]")).getText();
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
       String adress = element.findElement(By.xpath(".//td[4]")).getText();
       int id = Integer.parseInt(element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value"));
-ContactData contact = new ContactData(id,firstName, null, lastName, null, null, null, adress, null, null,null, null, null, null, null, null, null, null);
-contacts.add(contact);
+      ContactData contact = new ContactData(id, firstName, null, lastName, null, null, null, adress, null, null, null, null, null, null, null, null, null, null);
+      contacts.add(contact);
     }
     return contacts;
   }
