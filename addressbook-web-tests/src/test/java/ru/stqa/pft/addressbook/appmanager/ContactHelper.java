@@ -95,7 +95,7 @@ public class ContactHelper extends HelperBase{
       String firstName = element.findElement(By.xpath(".//td[3]")).getText();
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
       String adress = element.findElement(By.xpath(".//td[4]")).getText();
-      String id = element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value");
+      int id = Integer.parseInt(element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value"));
 ContactData contact = new ContactData(id,firstName, null, lastName, null, null, null, adress, null, null,null, null, null, null, null, null, null, null);
 contacts.add(contact);
     }
