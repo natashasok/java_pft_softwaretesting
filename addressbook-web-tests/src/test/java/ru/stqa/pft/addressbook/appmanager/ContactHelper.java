@@ -58,8 +58,8 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void initContactModification() {
-    click(By.cssSelector("img[alt=\"Edit\"]"));
+  public void initContactModification(int index) {
+    wd.findElements(By.xpath("(//img[@alt='Edit'])")).get(index).click();
   }
 
   public void submitContactModification() {
@@ -94,9 +94,9 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elements) {
       String firstName = element.findElement(By.xpath(".//td[3]")).getText();
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
-      String adress = element.findElement(By.xpath(".//td[4]")).getText();
+      //String adress = element.findElement(By.xpath(".//td[4]")).getText();
       int id = Integer.parseInt(element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value"));
-      ContactData contact = new ContactData(id, firstName, null, lastName, null, null, null, adress, null, null, null, null, null, null, null, null, null, null);
+      ContactData contact = new ContactData(id, firstName, null, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
