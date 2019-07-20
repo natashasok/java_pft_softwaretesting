@@ -32,6 +32,5 @@ public class GroupModificationTests extends TestBase {
     after.sort(byId);
     Assert.assertEquals(before, after);
 
-    app.logout();
   }
 }

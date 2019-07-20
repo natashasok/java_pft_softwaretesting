@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
-  @Test
+  @Test (enabled = false)
   public void testContactModification(){
 
     if (! app.getContactHelper().isThereAContact()){
@@ -32,6 +32,5 @@ public class ContactModificationTests extends TestBase {
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
-    app.logout();
   }
 }
