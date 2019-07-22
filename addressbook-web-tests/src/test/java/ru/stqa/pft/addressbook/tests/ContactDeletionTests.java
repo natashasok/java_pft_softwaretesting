@@ -11,10 +11,12 @@ public class ContactDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.contact().list().size() == 0){
-      app.contact().create(new ContactData("Nataliia", "Sergeevna", "Sokolova",
-              "natasha_sok", "ns", "N_company", "Yaroslavl", "70-80-90",
-              "+7910-123-67-08", "99-70-54", "nsokolova_fax", "nsokolova@N_company.ru",
-              "nsokolova2@N_company.ru", "1989", "18", "September", "test1"), true);
+      app.contact().create(new ContactData().withFirstName("Nataliia2").withMiddleName("Sergeevna")
+              .withLastName("Sokolova").withNickName("natasha_sok").withTitle("ns")
+              .withCompany("N_company").withAddress("Yaroslavl").withPhoneHome("70-80-90")
+              .withPhoneMobile("+7910-123-67-08").withPhoneWork("99-70-54").withFax("nsokolova_fax")
+              .withEmail("nsokolova@N_company.ru").withEmail2("nsokolova2@N_company.ru")
+              .withByear("1989").withBday("18").withBmonth("September").withGroup("test1"), true);
     }
     app.goTo().homePage();
   }
