@@ -6,13 +6,14 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
 
-  @Test (enabled = false)
+  @Test
   public void testContactCreation() {
-    List<ContactData> before =app.contact().list();
+    Set<ContactData> before =app.contact().all();
     ContactData contact = new ContactData().withFirstName("Nataliia2").withMiddleName("Sergeevna")
             .withLastName("Sokolova").withNickName("natasha_sok").withTitle("ns")
             .withCompany("N_company").withAddress("Yaroslavl").withPhoneHome("70-80-90")
@@ -22,13 +23,10 @@ public class ContactCreationTests extends TestBase {
     app.contact().initContactCreation();
     app.contact().create( contact, true);
     app.goTo().homePage();
-    List<ContactData> after =app.contact().list();
+    Set<ContactData> after =app.contact().all();
     Assert.assertEquals(after.size(), before.size() + 1);
-
+    contact.withId(after.stream().mapToInt((g) ->g.getId()).max().getAsInt());
     before.add(contact);
-    Comparator<? super ContactData> byId = (с1, с2) -> Integer.compare(с1.getId(), с2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
   }
 
