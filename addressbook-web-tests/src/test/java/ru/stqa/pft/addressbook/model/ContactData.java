@@ -12,6 +12,7 @@ public class ContactData {
   private String company;
   private String address;
   private String phoneHome;
+  private String allPhones;
   private String phoneMobile;
   private String phoneWork;
   private String fax;
@@ -128,7 +129,15 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
 
+
+  public String getAllPhones() {
+    return allPhones;
+  }
   public String getFirstName() {
     return firstName;
   }

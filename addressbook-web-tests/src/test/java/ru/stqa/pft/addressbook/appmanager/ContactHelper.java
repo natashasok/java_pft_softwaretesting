@@ -127,11 +127,11 @@ public class ContactHelper extends HelperBase {
       String firstName = element.findElement(By.xpath(".//td[3]")).getText();
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
       //String adress = element.findElement(By.xpath(".//td[4]")).getText();
-      String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
+      String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
       int id = Integer.parseInt(element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value"));
 
       contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-              .withPhoneHome(phones[0]).withPhoneMobile(phones[1]).withPhoneWork(phones[2]));
+              .withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }
