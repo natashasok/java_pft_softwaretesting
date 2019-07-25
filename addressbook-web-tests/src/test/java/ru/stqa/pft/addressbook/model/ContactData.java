@@ -22,6 +22,7 @@ public class ContactData {
   private String bday;
   private String bmonth;
   private String group;
+  private String allEmail;
 
 
   @Override
@@ -135,6 +136,12 @@ public class ContactData {
   }
 
 
+  public ContactData withAllEmail(String allEmail) {
+    this.allEmail = allEmail;
+    return this;
+  }
+
+
   public String getAllPhones() {
     return allPhones;
   }
@@ -204,6 +211,10 @@ public class ContactData {
 
   public String getGroup(){
     return group;
+  }
+
+  public String getAllEmail() {
+    return allEmail;
   }
 
   @Override
