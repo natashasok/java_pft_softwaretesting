@@ -23,7 +23,7 @@ public class ContactData {
   private String bmonth;
   private String group;
   private String allEmail;
-
+  private String email3;
 
   @Override
   public String toString() {
@@ -141,6 +141,12 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+
 
   public String getAllPhones() {
     return allPhones;
@@ -215,6 +221,9 @@ public class ContactData {
 
   public String getAllEmail() {
     return allEmail;
+  }
+  public String getEmail3() {
+    return email3;
   }
 
   @Override

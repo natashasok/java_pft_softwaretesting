@@ -37,6 +37,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("fax"), contactData.getFax());
     type(By.name("email"), contactData.getEmail());
     type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
     click(By.name("bday"));
     new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getBday());
     click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Birthday:'])[1]/following::option[20]"));
@@ -133,7 +134,7 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value"));
 
       contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-              .withAllPhones(allPhones).withAddress(address));
+              .withAllPhones(allPhones).withAddress(address).withAllEmail(allEmail));
     }
     return new Contacts(contactCache);
   }
@@ -148,8 +149,9 @@ public class ContactHelper extends HelperBase {
     String address = wd.findElement(By.name("address")).getAttribute("value");
     String email = wd.findElement(By.name("email")).getAttribute("value");
     String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
-            .withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work).withAddress(address).withEmail(email).withEmail2(email2);
+            .withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work).withAddress(address).withEmail(email).withEmail2(email2).withEmail3(email3);
   }
 }
