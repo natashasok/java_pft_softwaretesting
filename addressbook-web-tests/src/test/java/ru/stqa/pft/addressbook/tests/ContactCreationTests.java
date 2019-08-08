@@ -59,12 +59,12 @@ public class ContactCreationTests extends TestBase {
 
   @Test (dataProvider = "validContact")
   public void testContactCreation(ContactData contact) {
-    Contacts before =app.contact().all();
+    Contacts before =app.db().contacts();
     app.contact().initContactCreation();
     app.contact().create( contact, true);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after =app.contact().all();
+    Contacts after =app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) ->g.getId()).max().getAsInt()))));
   }
