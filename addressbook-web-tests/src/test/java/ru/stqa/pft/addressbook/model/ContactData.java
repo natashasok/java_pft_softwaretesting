@@ -295,7 +295,11 @@ public class ContactData {
     return email3;
   }
   public File getPhoto() {
-    return new File(photo);
+    if (photo == null) {
+      return null;
+    } else {
+      return new File(photo);
+    }
   }
 
 

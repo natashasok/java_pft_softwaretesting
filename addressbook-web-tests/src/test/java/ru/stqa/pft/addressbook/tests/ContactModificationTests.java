@@ -38,7 +38,7 @@ public class ContactModificationTests extends TestBase {
             .withLastName("Sokolova").withNickName("natasha_sok").withTitle("ns")
             .withCompany("N_company").withAddress("Yaroslavl").withPhoneHome("70-80-90")
             .withPhoneMobile("+7910-123-67-08").withPhoneWork("99-70-54").withFax("nsokolova_fax")
-            .withEmail("nsokolova@N_company.ru").withEmail2("nsokolova2@N_company.ru").withEmail3("1");
+            .withEmail("nsokolova@N_company.ru").withEmail2("nsokolova2@N_company.ru").withEmail3("1").withBday("18").withBmonth("September").withByear("1989");
     app.contact().modify(contact);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size()));

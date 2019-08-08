@@ -10,26 +10,4 @@
     <bmonth>September</bmonth>
     <group>test1</group>
   </contact>
-  <contact>
-    <firstName>firstName 1</firstName>
-    <middleName>middleName 1</middleName>
-    <lastName>lastName 1</lastName>
-    <address>address 1</address>
-    <email>email 1</email>
-    <byear>1989</byear>
-    <bday>18</bday>
-    <bmonth>September</bmonth>
-    <group>test1</group>
-  </contact>
-  <contact>
-    <firstName>firstName 2</firstName>
-    <middleName>middleName 2</middleName>
-    <lastName>lastName 2</lastName>
-    <address>address 2</address>
-    <email>email 2</email>
-    <byear>1989</byear>
-    <bday>18</bday>
-    <bmonth>September</bmonth>
-    <group>test1</group>
-  </contact>
 </list>
