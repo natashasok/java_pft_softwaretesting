@@ -160,4 +160,14 @@ public class ContactHelper extends HelperBase {
     return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
             .withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work).withAddress(address).withEmail(email).withEmail2(email2).withEmail3(email3);
   }
+
+  public void addToGroup(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactAddToGroup();
+    contactCache = null;
+  }
+
+  private void initContactAddToGroup() {
+    click(By.xpath("[@id=\"content\"]/form[2]/div[4]/input"));
+  }
 }
