@@ -168,11 +168,17 @@ public class ContactHelper extends HelperBase {
     contactCache = null;
   }
 
-  private void selectGroup(int id) {
-    wd.findElement(By.cssSelector("option[value='" + id + "']")).click();
+  public void selectAllGroups() {
+    wd.findElement(By.name("group")).click();
+    wd.findElement(By.xpath(".//select[@name='to_group']/option[@value'[all]']")).click();
   }
 
-  private void initContactAddToGroup() {
+  private void selectGroup(int id) {
+    wd.findElement(By.name("to_group")).click();
+    wd.findElement(By.xpath(".//select[@name='to_group']/option[@value='"+ id +"']")).click();
+  }
+
+  public void initContactAddToGroup() {
     click(By.cssSelector("input[value='Add to']"));
   }
 }

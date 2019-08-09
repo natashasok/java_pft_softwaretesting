@@ -45,6 +45,7 @@ public class ContactAddToGroupTests extends TestBase {
               withFirstName(addContact.getFirstName()).withAddress(addContact.getAddress()).withLastName(addContact.getLastName());
       app.contact().addToGroup(contact1);
      app.goTo().goHomeLink();
+     app.contact().selectAllGroups();
      assertThat(app.contact().count(), equalTo(before.size()));
      Contacts after =app.db().contacts();
      assertThat(after, equalTo(before.without(addContact).withAdded(contact1)));
@@ -53,6 +54,7 @@ public class ContactAddToGroupTests extends TestBase {
             withFirstName(addContact.getFirstName()).withAddress(addContact.getAddress()).withLastName(addContact.getLastName());
      app.contact().addToGroup(contact);
      app.goTo().goHomeLink();
+     app.contact().selectAllGroups();
      assertThat(app.contact().count(), equalTo(before.size()));
      Contacts after =app.db().contacts();
      assertThat(after, equalTo(before.without(addContact).withAdded(contact)));
