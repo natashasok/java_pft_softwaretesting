@@ -26,6 +26,10 @@ public class ContactAddToGroupTests extends TestBase {
               .withByear("1989").withBday("18").withBmonth("September"), true);
       app.goTo().homePage();
     }
+    if (app.db().groups().size() == 0){
+      app.group().create(new GroupData().withName("test").withFooter("footer").withHeader("header"));
+      app.goTo().goHomeLink();
+    }
   }
 
   @Test

@@ -170,7 +170,7 @@ public class ContactHelper extends HelperBase {
 
   public void selectAllGroups() {
     wd.findElement(By.name("group")).click();
-    wd.findElement(By.xpath(".//select[@name='to_group']/option[@value'[all]']")).click();
+    wd.findElement(By.xpath(".//select[@name='to_group']/option[1]")).click();
   }
 
   private void selectGroup(int id) {
