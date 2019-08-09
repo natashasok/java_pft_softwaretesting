@@ -163,9 +163,13 @@ public class ContactHelper extends HelperBase {
 
   public void addToGroup(ContactData contact) {
     selectContactById(contact.getId());
-    
+    selectGroup(77);
     initContactAddToGroup();
     contactCache = null;
+  }
+
+  private void selectGroup(int id) {
+    wd.findElement(By.cssSelector("option[value='" + id + "']")).click();
   }
 
   private void initContactAddToGroup() {
