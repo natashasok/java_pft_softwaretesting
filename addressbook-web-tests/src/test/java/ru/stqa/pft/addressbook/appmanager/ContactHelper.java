@@ -168,6 +168,6 @@ public class ContactHelper extends HelperBase {
   }
 
   private void initContactAddToGroup() {
-    click(By.xpath("[@id=\"content\"]/form[2]/div[4]/input"));
+    click(By.cssSelector("input[value='Add to']"));
   }
 }

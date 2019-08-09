@@ -32,7 +32,7 @@ public class ContactAddToGroupTests extends TestBase {
     ContactData addContact = before.iterator().next();
     ContactData contact = new ContactData().withId(addContact.getId()).inGroup(groups.iterator().next());
     app.contact().addToGroup(contact);
-    app.goTo().homePage();
+    app.goTo().goHomeLink();
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after =app.db().contacts();
     assertThat(after, equalTo(before.without(addContact).withAdded(contact)));
