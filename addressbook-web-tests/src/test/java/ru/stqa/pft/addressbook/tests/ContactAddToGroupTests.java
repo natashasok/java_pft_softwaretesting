@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -30,7 +31,13 @@ public class ContactAddToGroupTests extends TestBase {
     Groups groups = app.db().groups();
     Contacts before =app.db().contacts();
     ContactData addContact = before.iterator().next();
-    ContactData contact = new ContactData().withId(addContact.getId()).inGroup(groups.iterator().next());
+    ContactData contact = new ContactData().withId(addContact.getId()).inGroup(groups.iterator().next()).
+            withFirstName(addContact.getFirstName()).withAddress(addContact.getAddress()).withLastName(addContact.getLastName());
+    if (addContact.getGroups().size() > 0){
+      Groups allGroupsContact = addContact.getGroups();
+      System.out.println(allGroupsContact);
+      //groups.without();
+    }
     app.contact().addToGroup(contact);
     app.goTo().goHomeLink();
     assertThat(app.contact().count(), equalTo(before.size()));
