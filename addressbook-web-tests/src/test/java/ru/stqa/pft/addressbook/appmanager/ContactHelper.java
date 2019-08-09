@@ -163,6 +163,7 @@ public class ContactHelper extends HelperBase {
 
   public void addToGroup(ContactData contact) {
     selectContactById(contact.getId());
+    
     initContactAddToGroup();
     contactCache = null;
   }

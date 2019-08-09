@@ -7,6 +7,8 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.stqa.pft.addressbook.tests.TestBase.app;
@@ -29,20 +31,32 @@ public class ContactAddToGroupTests extends TestBase {
   @Test
   public void testContactAddToGroup(){
     Groups groups = app.db().groups();
+    Groups groupsWithoutGroupContacts = app.db().groups();
     Contacts before =app.db().contacts();
     ContactData addContact = before.iterator().next();
-    ContactData contact = new ContactData().withId(addContact.getId()).inGroup(groups.iterator().next()).
-            withFirstName(addContact.getFirstName()).withAddress(addContact.getAddress()).withLastName(addContact.getLastName());
-    if (addContact.getGroups().size() > 0){
+   if (addContact.getGroups().size() > 0){
       Groups allGroupsContact = addContact.getGroups();
       System.out.println(allGroupsContact);
-      //groups.without();
-    }
-    app.contact().addToGroup(contact);
-    app.goTo().goHomeLink();
-    assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after =app.db().contacts();
-    assertThat(after, equalTo(before.without(addContact).withAdded(contact)));
-    verifyContactListInUI();
+      for(GroupData group :addContact.getGroups()) {
+        groupsWithoutGroupContacts.remove(group);
+      }
+      System.out.println(groupsWithoutGroupContacts);
+      ContactData contact1 = new ContactData().withId(addContact.getId()).inGroup(groupsWithoutGroupContacts.iterator().next()).
+              withFirstName(addContact.getFirstName()).withAddress(addContact.getAddress()).withLastName(addContact.getLastName());
+      app.contact().addToGroup(contact1);
+     app.goTo().goHomeLink();
+     assertThat(app.contact().count(), equalTo(before.size()));
+     Contacts after =app.db().contacts();
+     assertThat(after, equalTo(before.without(addContact).withAdded(contact1)));
+     verifyContactListInUI();
+    } else { ContactData contact = new ContactData().withId(addContact.getId()).inGroup(groups.iterator().next()).
+            withFirstName(addContact.getFirstName()).withAddress(addContact.getAddress()).withLastName(addContact.getLastName());
+     app.contact().addToGroup(contact);
+     app.goTo().goHomeLink();
+     assertThat(app.contact().count(), equalTo(before.size()));
+     Contacts after =app.db().contacts();
+     assertThat(after, equalTo(before.without(addContact).withAdded(contact)));
+     verifyContactListInUI();
+   }
   }
 }
