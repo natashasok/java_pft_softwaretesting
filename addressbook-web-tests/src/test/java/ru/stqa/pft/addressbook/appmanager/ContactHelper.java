@@ -181,4 +181,19 @@ public class ContactHelper extends HelperBase {
   public void initContactAddToGroup() {
     click(By.cssSelector("input[value='Add to']"));
   }
+
+  public void deleteGroupFromContact(ContactData contact) {
+    selectContactById(contact.getId());
+    initDeleteGroupFromContact();
+    contactCache = null;
+  }
+
+  private void initDeleteGroupFromContact() {
+    wd.findElement(By.name("remove")).click();
+  }
+
+  public void selectGroupInFooter(int id) {
+    wd.findElement(By.name("group")).click();
+    wd.findElement(By.xpath(".//select[@name='group']/option[@value='"+ id +"']")).click();
+  }
 }
