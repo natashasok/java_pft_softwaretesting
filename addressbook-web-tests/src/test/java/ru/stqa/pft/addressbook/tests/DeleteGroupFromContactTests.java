@@ -1,6 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -35,7 +38,8 @@ public class DeleteGroupFromContactTests extends TestBase{
     Groups groups = app.db().groups();
     Contacts before =app.db().contacts();
     app.contact().selectGroupInFooter(groups.iterator().next().getId());
-      while (app.contact().all().size() < 0){
+    Contacts contactInGroup = app.contact().all();
+      while (contactInGroup.size() < 0){
           app.contact().selectGroupInFooter(groups.iterator().next().getId());
     }
     Contacts contactsInGroup = app.contact().all();
