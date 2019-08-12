@@ -38,10 +38,23 @@ public class DeleteGroupFromContactTests extends TestBase{
     Groups groups = app.db().groups();
     Contacts before =app.db().contacts();
     app.contact().selectGroupInFooter(groups.iterator().next().getId());
-    Contacts contactInGroup = app.contact().all();
-      while (contactInGroup.size() < 0){
-          app.contact().selectGroupInFooter(groups.iterator().next().getId());
-    }
+//       for (GroupData group : groups) {
+//          app.contact().selectGroupInFooter(groups.iterator().next().getId());
+//          if (app.contact().all().size() > 0) {
+//          return;
+//          }
+//       }
+
+//    while (groups.iterator().hasNext()) {
+//      //app.contact().selectGroupInFooter(groups.iterator().next().getId());
+//      if (app.contact().all().size() > 0) {
+//        System.out.println("жопа");
+//        return;
+//      } else {
+//        app.contact().selectGroupInFooter(groups.iterator().next().getId());
+//      }
+//      groups.iterator().next();
+//    }
     Contacts contactsInGroup = app.contact().all();
     ContactData contactWithGroup = contactsInGroup.iterator().next();
     ContactData contact = new ContactData().withId(contactWithGroup.getId()).
