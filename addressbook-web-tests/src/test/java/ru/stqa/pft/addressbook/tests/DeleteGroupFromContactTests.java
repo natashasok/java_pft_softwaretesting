@@ -36,31 +36,22 @@ public class DeleteGroupFromContactTests extends TestBase{
   @Test
   public void testDeleteGroupFromContact(){
     Groups groups = app.db().groups();
+    Groups groupHaveContact  = new Groups();
     Contacts before =app.db().contacts();
-    app.contact().selectGroupInFooter(groups.iterator().next().getId());
-//       for (GroupData group : groups) {
-//          app.contact().selectGroupInFooter(groups.iterator().next().getId());
-//          if (app.contact().all().size() > 0) {
-//          return;
-//          }
-//       }
-
-//    while (groups.iterator().hasNext()) {
-//      //app.contact().selectGroupInFooter(groups.iterator().next().getId());
-//      if (app.contact().all().size() > 0) {
-//        System.out.println("жопа");
-//        return;
-//      } else {
-//        app.contact().selectGroupInFooter(groups.iterator().next().getId());
-//      }
-//      groups.iterator().next();
-//    }
-    Contacts contactsInGroup = app.contact().all();
-    ContactData contactWithGroup = contactsInGroup.iterator().next();
+      for (GroupData group : groups) {
+         app.contact().selectGroupInFooter(group.getId());
+         if (app.contact().all().size() > 0) {
+           groupHaveContact.add(group);
+         }
+       }
+    System.out.println(groupHaveContact);
+    app.contact().selectGroupInFooter(groupHaveContact.iterator().next().getId());
+    ContactData contactWithGroup = app.contact().all().iterator().next();
     ContactData contact = new ContactData().withId(contactWithGroup.getId()).
             withFirstName(contactWithGroup.getFirstName()).withAddress(contactWithGroup.getAddress()).withLastName(contactWithGroup.getLastName());
     app.contact().deleteGroupFromContact(contact);
     app.goTo().goHomeLink();
+    app.contact().selectAllGroups();
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after =app.db().contacts();
     assertThat(after, equalTo(before.without(contactWithGroup).withAdded(contact)));

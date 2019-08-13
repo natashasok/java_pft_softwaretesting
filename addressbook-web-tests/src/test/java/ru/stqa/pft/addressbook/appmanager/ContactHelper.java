@@ -125,6 +125,7 @@ public class ContactHelper extends HelperBase {
   private Contacts contactCache = null;
 
   public Contacts all() {
+    Contacts contactCache = null;
     if (contactCache != null) {
       return new Contacts(contactCache);
     }
@@ -170,7 +171,7 @@ public class ContactHelper extends HelperBase {
 
   public void selectAllGroups() {
     wd.findElement(By.name("group")).click();
-    wd.findElement(By.xpath(".//select[@name='to_group']/option[1]")).click();
+    wd.findElement(By.xpath(".//select[@name='to_group']/[contains(@option,'[all]')]")).click();
   }
 
   private void selectGroup(int id) {
