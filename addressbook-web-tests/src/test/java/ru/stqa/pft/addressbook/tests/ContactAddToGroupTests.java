@@ -44,8 +44,11 @@ public class ContactAddToGroupTests extends TestBase {
         groupsWithoutGroupContacts.remove(group);
       }
       if (groupsWithoutGroupContacts.size() == 0) {
-        app.contact().selectGroupInFooter(groupsWithoutGroupContacts.iterator().next().getId());
+        app.contact().selectGroupInFooter(groups.iterator().next().getId());
         app.contact().deleteGroupFromContact(addContact);
+        app.goTo().goHomeLink();
+        app.contact().selectAllGroups();
+        groupsWithoutGroupContacts.add(groups.iterator().next());
       }
     }
     ContactData contact = new ContactData().withId(addContact.getId()).

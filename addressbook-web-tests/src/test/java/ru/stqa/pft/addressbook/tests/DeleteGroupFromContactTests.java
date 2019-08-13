@@ -44,7 +44,14 @@ public class DeleteGroupFromContactTests extends TestBase{
            groupHaveContact.add(group);
          }
        }
-    System.out.println(groupHaveContact);
+      if (groupHaveContact.size() == 0){
+        app.contact().selectAllGroups();
+        app.contact().selectGroup(groups.iterator().next().getId());
+        app.contact().addToGroup(app.db().contacts().iterator().next());
+        app.goTo().goHomeLink();
+        app.contact().selectAllGroups();
+        groupHaveContact.add(groups.iterator().next());
+      }
     app.contact().selectGroupInFooter(groupHaveContact.iterator().next().getId());
     ContactData contactWithGroup = app.contact().all().iterator().next();
     ContactData contact = new ContactData().withId(contactWithGroup.getId()).
