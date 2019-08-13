@@ -164,17 +164,18 @@ public class ContactHelper extends HelperBase {
 
   public void addToGroup(ContactData contact) {
     selectContactById(contact.getId());
-    selectGroup(77);
     initContactAddToGroup();
     contactCache = null;
   }
 
   public void selectAllGroups() {
-    wd.findElement(By.name("group")).click();
-    wd.findElement(By.xpath(".//select[@name='to_group']/[contains(@option,'[all]')]")).click();
+    //wd.findElement(By.name("group")).click();
+    //wd.findElement(By.xpath(".//select[@name='group']/option[text()='[all]']")).click();
+    new  Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+    //new  Select(wd.findElement(By.xpath("//select[@name='group']/option[text()='[all]']"))).selectByVisibleText("[all]");
   }
 
-  private void selectGroup(int id) {
+  public void selectGroup(int id) {
     wd.findElement(By.name("to_group")).click();
     wd.findElement(By.xpath(".//select[@name='to_group']/option[@value='"+ id +"']")).click();
   }
