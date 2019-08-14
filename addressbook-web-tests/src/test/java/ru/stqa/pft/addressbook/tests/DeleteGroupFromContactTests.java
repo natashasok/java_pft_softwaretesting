@@ -37,7 +37,8 @@ public class DeleteGroupFromContactTests extends TestBase{
   public void testDeleteGroupFromContact(){
     Groups groups = app.db().groups();
     Groups groupHaveContact  = new Groups();
-    Contacts before =app.db().contacts();
+    Groups test  = new Groups();
+    //Contacts before =app.db().contacts();
       for (GroupData group : groups) {
          app.contact().selectGroupInFooter(group.getId());
          if (app.contact().all().size() > 0) {
@@ -54,14 +55,19 @@ public class DeleteGroupFromContactTests extends TestBase{
       }
     app.contact().selectGroupInFooter(groupHaveContact.iterator().next().getId());
     ContactData contactWithGroup = app.contact().all().iterator().next();
+    Contacts before = app.db().contact(contactWithGroup.getId());
+    //Groups before = contactWithGroup.getGroups();
+    System.out.println(before);
     ContactData contact = new ContactData().withId(contactWithGroup.getId()).
             withFirstName(contactWithGroup.getFirstName()).withAddress(contactWithGroup.getAddress()).withLastName(contactWithGroup.getLastName());
     app.contact().deleteGroupFromContact(contact);
     app.goTo().goHomeLink();
     app.contact().selectAllGroups();
-    assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after =app.db().contacts();
-    assertThat(after, equalTo(before.without(contactWithGroup).withAdded(contact)));
+    //assertThat(app.contact().count(), equalTo(before.size()));
+    //assertThat(contact.getGroups().size(), equalTo(before.size() - 1));
+    //Contacts after =app.db().contacts();
+    Groups after =contact.getGroups();
+    assertThat(after, equalTo(before.without()));
     verifyContactListInUI();
   }
 
