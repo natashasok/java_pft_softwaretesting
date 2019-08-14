@@ -55,7 +55,7 @@ public class DeleteGroupFromContactTests extends TestBase{
       }
     app.contact().selectGroupInFooter(groupHaveContact.iterator().next().getId());
     ContactData contactWithGroup = app.contact().all().iterator().next();
-    Contacts before = app.db().contact(contactWithGroup.getId());
+    Groups before = app.db().contact(contactWithGroup.getId()).getGroups();
     //Groups before = contactWithGroup.getGroups();
     System.out.println(before);
     ContactData contact = new ContactData().withId(contactWithGroup.getId()).
@@ -64,10 +64,10 @@ public class DeleteGroupFromContactTests extends TestBase{
     app.goTo().goHomeLink();
     app.contact().selectAllGroups();
     //assertThat(app.contact().count(), equalTo(before.size()));
-    //assertThat(contact.getGroups().size(), equalTo(before.size() - 1));
+    assertThat(contact.getGroups().size(), equalTo(before.size() - 1));
     //Contacts after =app.db().contacts();
     Groups after =contact.getGroups();
-    assertThat(after, equalTo(before.without()));
+   // assertThat(after, equalTo(before.without()));
     verifyContactListInUI();
   }
 
