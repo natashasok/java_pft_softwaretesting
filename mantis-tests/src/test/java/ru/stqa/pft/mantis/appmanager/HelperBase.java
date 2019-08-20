@@ -11,7 +11,7 @@ public class HelperBase {
 
   public HelperBase(ApplicationManager app){
     this.app =app;
-    this.wd = app.getWebDriver();
+    this.wd = app.getDriver();
   }
 
   protected void click (By locator) {
@@ -35,10 +35,10 @@ public class HelperBase {
     }
   }
 
-  public boolean isAlertPresent() {
+  /*public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
       return true;
     }
-  }
+  }*/
 }
