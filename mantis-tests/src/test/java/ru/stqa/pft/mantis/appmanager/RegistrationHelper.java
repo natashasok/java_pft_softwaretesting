@@ -22,4 +22,24 @@ public class RegistrationHelper extends HelperBase{
     type(By.name("password_confirm"), password);
     click(By.xpath("//*[@id=\"account-update-form\"]/fieldset/span/button/span"));
   }
+
+  public void choiceUser(String user, String passwordAdmin) {
+    wd.get(app.getProperty("web.baseUrl") + "/manage_user_page.php");
+    click(By.xpath("//a[text()='"+ user +"']"));
+  //  type(By.name("password"), passwordAdmin);
+  //  click(By.cssSelector("input[value='Login']"));
+  }
+
+  public void login(String user, String password) {
+    wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
+    type(By.name("username"), user);
+    click(By.cssSelector("input[value='Login']"));
+    type(By.name("password"), password);
+    click(By.cssSelector("input[value='Login']"));
+  }
+
+
+  public void resetPassword() {
+    click(By.cssSelector("input[value='Reset Password']"));
+  }
 }
