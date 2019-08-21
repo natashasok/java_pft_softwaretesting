@@ -20,7 +20,7 @@ public class RegistrationTests extends TestBase{
   }
 
   @Test
-  public void testRegistration() throws IOException, MessagingException {
+  public void testRegistration() throws IOException, MessagingException, javax.mail.MessagingException {
     long now = System.currentTimeMillis();
 
     String user = String.format("user%s", now);
