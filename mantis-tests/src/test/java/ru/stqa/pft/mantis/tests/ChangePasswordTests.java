@@ -8,8 +8,10 @@ import ru.stqa.pft.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.testng.Assert.assertTrue;
 
@@ -38,10 +40,7 @@ public class ChangePasswordTests extends TestBase{
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
-   // MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-   // MailMessage mailMessage = Streams.findLast(mailMessages.stream().filter((m) -> m.to.equals(email))).get();
-    MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).reduce((first, second) -> second).orElse(null);
-    //MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email))
+    MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).collect(Collectors.toList()).get(mailMessages.size()-1);
     VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
   }
