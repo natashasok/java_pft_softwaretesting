@@ -32,6 +32,9 @@ public class ChangePasswordTests extends TestBase{
     List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
     app.registration().finish(confirmationLink, passwordNew);
+    HttpSession session = app.newSession();
+    assertTrue( session.login(user, passwordNew));
+    assertTrue(session.isLoggedInAs(user));
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
