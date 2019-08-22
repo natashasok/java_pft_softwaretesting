@@ -20,10 +20,10 @@ public class ChangePasswordTests extends TestBase{
 
   @Test
   public void testChangePassword() throws IOException, MessagingException {
-    String user = "user1566400874029";
+    String user = "user1566492452421";
     String password = "password";
     String passwordNew = "passwordNew";
-    String email = "user1566400874029@localhost";
+    String email = "user1566492452421@localhost";
     String passwordAdmin = "root";
     String loginAdmin = "administrator";
     app.james().deleteUser(user);
@@ -31,6 +31,7 @@ public class ChangePasswordTests extends TestBase{
     app.registration().login(loginAdmin, passwordAdmin);
     app.registration().choiceUser(user, passwordAdmin);
     app.registration().resetPassword();
+    app.james().drainEmail(user, password);
     List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
     app.registration().finish(confirmationLink, passwordNew);
@@ -40,7 +41,8 @@ public class ChangePasswordTests extends TestBase{
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
-    MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).collect(Collectors.toList()).get(mailMessages.size()-1);
+  //  MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
+   MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).collect(Collectors.toList()).get(mailMessages.size()-1);
     VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
   }

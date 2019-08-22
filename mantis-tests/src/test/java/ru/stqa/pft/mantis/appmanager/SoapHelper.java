@@ -21,7 +21,7 @@ public class SoapHelper {
     this.app = app;
   }
 
-  public Set<Project> getProject() throws RemoteException, MalformedURLException, ServiceException {
+  public Set<Project> getProjects() throws RemoteException, MalformedURLException, ServiceException {
     MantisConnectPortType mc = new MantisConnectLocator()
             .getMantisConnectPort(new URL("http://localhost/mantisbt-2.21.1/api/soap/mantisconnect.php"));
     ProjectData[] projects = mc.mc_projects_get_user_accessible("administrator", "root");
