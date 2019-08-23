@@ -22,27 +22,27 @@ public class ChangePasswordTests extends TestBase{
 
   @Test
   public void testChangePassword() throws IOException, MessagingException {
-    //String user = "user1566492452421";
     String password = "password";
     String passwordNew = "passwordNew";
-    String email = "user1566492452421@localhost";
     String passwordAdmin = "root";
     String loginAdmin = "administrator";
     Users users = app.db().users();
     UserData user = users.iterator().next();
     System.out.println(user.getUsername());
-    /*app.james().deleteUser(user);
-    app.james().createUser(user, password);
+    if (app.james().doesUserExist(user.getUsername())){
+      app.james().deleteUser(user.getUsername());
+    }
+    app.james().createUser(user.getUsername(), password);
     app.registration().login(loginAdmin, passwordAdmin);
-    app.registration().choiceUser(user, passwordAdmin);
+    app.registration().choiceUser(user.getUsername(), passwordAdmin);
     app.registration().resetPassword();
-    app.james().drainEmail(user, password);
-    List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
-    String confirmationLink = findConfirmationLink(mailMessages, email);
+    app.james().drainEmail(user.getUsername(), password);
+    List<MailMessage> mailMessages = app.james().waitForMail(user.getUsername(), password, 60000);
+    String confirmationLink = findConfirmationLink(mailMessages, user.getEmail());
     app.registration().finish(confirmationLink, passwordNew);
     HttpSession session = app.newSession();
-    assertTrue( session.login(user, passwordNew));
-    assertTrue(session.isLoggedInAs(user));*/
+    assertTrue( session.login(user.getUsername(), passwordNew));
+    assertTrue(session.isLoggedInAs(user.getUsername()));
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
