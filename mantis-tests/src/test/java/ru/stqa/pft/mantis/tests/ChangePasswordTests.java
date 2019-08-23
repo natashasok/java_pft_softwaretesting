@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.model.MailMessage;
+import ru.stqa.pft.mantis.model.UserData;
+import ru.stqa.pft.mantis.model.Users;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -20,13 +22,16 @@ public class ChangePasswordTests extends TestBase{
 
   @Test
   public void testChangePassword() throws IOException, MessagingException {
-    String user = "user1566492452421";
+    //String user = "user1566492452421";
     String password = "password";
     String passwordNew = "passwordNew";
     String email = "user1566492452421@localhost";
     String passwordAdmin = "root";
     String loginAdmin = "administrator";
-    app.james().deleteUser(user);
+    Users users = app.db().users();
+    UserData user = users.iterator().next();
+    System.out.println(user.getUsername());
+    /*app.james().deleteUser(user);
     app.james().createUser(user, password);
     app.registration().login(loginAdmin, passwordAdmin);
     app.registration().choiceUser(user, passwordAdmin);
@@ -37,7 +42,7 @@ public class ChangePasswordTests extends TestBase{
     app.registration().finish(confirmationLink, passwordNew);
     HttpSession session = app.newSession();
     assertTrue( session.login(user, passwordNew));
-    assertTrue(session.isLoggedInAs(user));
+    assertTrue(session.isLoggedInAs(user));*/
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
