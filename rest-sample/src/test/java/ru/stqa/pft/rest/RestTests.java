@@ -26,21 +26,20 @@ public class RestTests {
       assertEquals(newIssues, oldIssues);
     }
 
-    private Set<Issue> getIssues () throws IOException {
+    private Set<Issue> getIssues() throws IOException {
       String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues.json"))
               .returnContent().asString();
       JsonElement parsed = new JsonParser().parse(json);
-      JsonElement issues = parsed.getAsJsonObject().get("issue");
+      JsonElement issues = parsed.getAsJsonObject().get("issues");
 
-      return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
-      }.getType());
+      return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
     }
 
-    private Executor getExecutor () {
+    private Executor getExecutor() {
       return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
     }
 
-    private int createIssue (Issue newIssue) throws IOException {
+    private int createIssue(Issue newIssue) throws IOException {
       String json = getExecutor().execute(Request.Post("https://bugify.stqa.ru/api/issues.json")
               .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
                       new BasicNameValuePair("description", newIssue.getDescription())))
