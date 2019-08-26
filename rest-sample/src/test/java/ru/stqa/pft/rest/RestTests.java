@@ -22,7 +22,7 @@ public class RestTests {
   @Test
   public void testCreateIssue() throws IOException {
     Set<Issue> oldIssues = getIssues();
-    Issue newIssue = new Issue();
+    Issue newIssue = new Issue().withSubject("Test issue").withDescription("New test issue");
     int issueId = createIssue(newIssue);
     Set<Issue> newIssues = getIssues();
     oldIssues.add(newIssue.withId(issueId));
@@ -47,7 +47,8 @@ public class RestTests {
           .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
                     new BasicNameValuePair("description", newIssue.getDescription())))
           .returnContent().asString();
-  return 0;
+    JsonElement parsed = new JsonParser().parse(json);
+    return parsed.getAsJsonObject().get("issue_id").getAsInt();
   }
 
 }
