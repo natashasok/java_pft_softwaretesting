@@ -27,15 +27,22 @@ public class TestBase {
   }
 
   private Set<Issue> getIssue(int issue_id) throws IOException {
-    String json = RestAssured.get("https://bugify.stqa.ru/api/issues/{"+issue_id+"}.json?limit=2000").asString();
+    String json = RestAssured.given().pathParam("issue_id", issue_id).when().get("https://bugify.stqa.ru/api/issues/{issue_id}.json").asString();
     JsonElement parsed = new JsonParser().parse(json);
-    JsonElement issues = parsed.getAsJsonObject().get("issues");
-    return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
-    }.getType());
+    JsonElement issue = parsed.getAsJsonObject().get("issues");
+
+    //String issue_status = issue.getAsJsonObject().get("state_name").getAsString();
+    return new Gson().fromJson(issue, new TypeToken<Set<Issue>>(){}.getType());
   }
 
   private boolean isIssueOpen(int issueId) throws IOException {
-    getIssue(1475);
+   /* Set<Issue> oldIssues = getIssue(1791);
+    Issue newIssue = oldIssues.
+    String resolution = newIssue.getState_name();
+    System.out.println(resolution);
+    if (resolution.equals("Open")){
+      return true;
+    }*/
     return false;
   }
 }
