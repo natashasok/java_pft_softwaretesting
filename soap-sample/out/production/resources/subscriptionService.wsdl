@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?><definitions xmlns:wsp="http://www.w3.org/ns/ws-policy/" xmlns:tns="http://emias.mos.ru/notifications/v1/subscription/soap/" xmlns:subscription="http://emias.mos.ru/notifications/v1/subscription/" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="subscription" targetNamespace="http://emias.mos.ru/notifications/v1/subscription/soap/">
+  <import location="http://notifications.emias.dzm.lanit.ru/notifications/application/api/SubscriptionService?wsdl=subscription.wsdl" namespace="http://emias.mos.ru/notifications/v1/subscription/">
+    </import>
+  <types>
+  </types>
+  <binding name="SubscriptionServicePortTypeBinding" type="subscription:SubscriptionServicePortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:Policy xmlns:wsp="http://www.w3.org/ns/ws-policy/" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+            <sp:SupportingTokens>
+                <wsp:Policy>
+                    <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                        <wsp:Policy>
+                            <sp:NoPassword/>
+                        </wsp:Policy>
+                    </sp:UsernameToken>
+                </wsp:Policy>
+            </sp:SupportingTokens>
+        </wsp:Policy>
+    <operation name="getSubscriptions">
+      <soap12:operation soapAction="getSubscriptions"/>
+      <input>
+        <soap12:header message="subscription:NotificationsUserContextMessage" part="header" use="literal">
+        </soap12:header>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+      <fault name="fault">
+        <soap12:fault name="fault" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getApplicantSubscriptions">
+      <soap12:operation soapAction="getApplicantSubscriptions"/>
+      <input>
+        <soap12:header message="subscription:NotificationsUserContextMessage" part="header" use="literal">
+        </soap12:header>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+      <fault name="fault">
+        <soap12:fault name="fault" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getSubscriptionTypes">
+      <soap12:operation soapAction="getSubscriptionTypes"/>
+      <input>
+        <soap12:header message="subscription:NotificationsUserContextMessage" part="header" use="literal">
+        </soap12:header>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+      <fault name="fault">
+        <soap12:fault name="fault" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="SubscriptionService">
+    <port binding="tns:SubscriptionServicePortTypeBinding" name="SubscriptionService">
+      <soap12:address location="http://notifications.emias.dzm.lanit.ru/notifications/application/api/SubscriptionService"/>
+    </port>
+  </service>
+</definitions>

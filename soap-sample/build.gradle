@@ -5,6 +5,7 @@ repositories {
 }
 dependencies {
     testCompile 'org.testng:testng:6.10'
+    testCompile 'org.xmlunit:xmlunit-core:2.6.3'
 }
 
 buildscript{
@@ -23,5 +24,6 @@ wsdl2java {
     wsdlDir = file("src/main/resources") // define to support incremental build
     wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
                           ['src/main/resources/ipservice.wsdl'],
+                          ['src/main/resources/subscriptionService.wsdl'],
     ]
 }

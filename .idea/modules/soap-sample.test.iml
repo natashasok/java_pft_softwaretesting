@@ -11,6 +11,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="soap-sample.main" />
     <orderEntry type="library" name="Gradle: org.testng:testng:6.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.xmlunit:xmlunit-core:2.6.3" level="project" />
     <orderEntry type="library" name="Gradle: com.beust:jcommander:1.48" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="soap-sample.main" />
